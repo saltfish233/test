@@ -4,6 +4,16 @@ import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 import os from 'node:os'
 
+// 主进程部分
+import {EUEvent, EUEventManager} from "easyuseclipboardpluginsdk/main";
+const a = new EUEvent("a");
+EUEventManager.install(a);
+EUEventManager.onR2M("a",(event, args?)=>{
+  console.log(1)
+});
+
+
+
 const require = createRequire(import.meta.url)
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -49,7 +59,7 @@ async function createWindow() {
     webPreferences: {
       preload,
       // Warning: Enable nodeIntegration and disable contextIsolation is not secure in production
-      // nodeIntegration: true,
+      nodeIntegration: true,
 
       // Consider using contextBridge.exposeInMainWorld
       // Read more on https://www.electronjs.org/docs/latest/tutorial/context-isolation
